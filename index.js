@@ -15,6 +15,21 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());  
 app.use(logger('dev'));
 
+// CUSTOM MIDDLEWARE
+app.use((req, res, next) => {
+    console.log('🍪:', req.cookies);
+    const username = req.cookies.username;
+  
+    res.locals.username = "";
+    // properties set on res.locals become accessible in any view
+    if (username) {
+      res.locals.username = username
+      console.log(`Signed in as ${username}`);
+    }
+    // next is a function, when invoked it will tell express to move on to the next middleware
+    next();
+  })
+
 app.get("/welcome", (request, response) => {
     const ONE_DAY = 1000 * 60 * 60 * 24;
     response.cookie('Hello', 'World', { maxAge: ONE_DAY })

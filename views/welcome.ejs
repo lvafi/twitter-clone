@@ -1,13 +1,22 @@
 <div class="form-control">
     <%- include('./partials/header') %>
     <%- include('./partials/navbar')%>
-    <form action='/sign_in' method="POST" class="container form-inline form-control">
-        <div>
-            <label for="username">Username</label>
-            <input class="form-control mr-2" name='username' placeholder="e.g. Madam Welminster"/>
-        </div>
-        <button type='submit' class='btn btn-outline-dark'>Sign In</button>    
-    </form>
+
+    <% if (username) { %>
+        <span class='navbar-text text-dark'>
+            <%= username %>
+        </span>
+    <% } else { %>
+        <form action='/sign_in' method="POST" class="container form-inline form-control">
+            <div>
+                <label for="username">Username</label>
+                <input class="form-control mr-2" name='username' placeholder="e.g. Madam Welminster"/>
+            </div>
+            <button type='submit' class='btn btn-outline-dark'>Sign In</button>    
+            
+        </form>
+    <% } %>
+    
     <%- include('./partials/footer') %>
 </div>
 
