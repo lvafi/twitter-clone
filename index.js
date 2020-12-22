@@ -43,6 +43,11 @@ app.post('/sign_in', (req, res) => {
     res.redirect('/welcome'); 
 })
 
+app.post('/sign_out', (req, res) => {
+    res.clearCookie('username');
+    res.redirect('/welcome');
+  });
+
 app.listen(3000, () => {
     console.log('Express web app on localhost: 3000');
 });
